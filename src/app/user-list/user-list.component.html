@@ -1,0 +1,63 @@
+
+<div class="container">
+        <br>
+        <div *ngIf="addFlag">
+            <form (ngSubmit)="formSubmit()" class="form-horizontal">
+                <div class="form-group">
+                    <label for="email" class="control-label col-sm-1">Name:</label>
+                    <input type="text" name='nameField' [(ngModel)]='data.uName' class="col-sm-9" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label col-sm-1">Password:</label>
+                    <input type="text" name='skuField' [(ngModel)]='data.password' class="col-sm-9" placeholder="Enter sku">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label col-sm-1">Token:</label>
+                    <input type="text" name='priceField' [(ngModel)]='data.token' class="col-sm-9" placeholder="Enter price" type="number"  min="0" pattern= "[0-9]" >
+                </div>
+                    <div class="form-group" class="col-sm-10">
+                    <button type="submit" class="btn btn-success">Add User</button>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <!--for update-->
+        <div *ngIf="!addFlag">
+          <form (ngSubmit)="formUpdate()" class="form-horizontal">
+            <div class="form-group">
+              <label for="email" class="control-label col-sm-1">ID:</label>
+              <input type="text" name='idField' [(ngModel)]='data.id' class="col-sm-9" disabled>
+            </div>
+            <div class="form-group">
+              <label for="email" class="control-label col-sm-1">Name:</label>
+              <input type="text" name='nameField' [(ngModel)]='data.uName' class="col-sm-9" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="control-label col-sm-1">Password:</label>
+              <input type="text" name='skuField' [(ngModel)]='data.password' class="col-sm-9" placeholder="Enter sku">
+            </div>
+            <div class="form-group">
+              <label for="email" class="control-label col-sm-1">Token:</label>
+              <input type="text" name='priceField' [(ngModel)]='data.token' class="col-sm-9" placeholder="Enter Token" type="string"   >
+            </div>
+            <div class="form-group" class="col-sm-10">
+              <button type="submit" class="btn btn-success">Update User</button>
+              <button type="button" class="btn btn-info" (click)='cancelUpdate()'>Cancel</button>
+            </div>      
+          </form>
+        </div>
+        <br> 
+
+<table class="table-responsive" >
+    <thead>
+        <tr bgcolor="black" style="color:white;"><th>Name</th><th>Password</th><th>Token</th><th></th><th></th> </tr>
+    </thead>
+    <tr *ngFor="let user of users; let index = index" class="table table-striped">
+        <td>{{user.uName}}</td>      
+        <td>{{user.password}}</td>      
+        <td>{{user.token}}</td>
+        <td style="width: 5%;"><button type="button" class="btn btn-success" (click)="loadForUpdate(user.id,user.uName,user.password,user.token )">Update</button></td>
+        <td style="width: 5%;"><button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button></td>
+    </tr>
+</table>
+</div>
