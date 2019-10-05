@@ -11,19 +11,19 @@ export class UserListComponent implements OnInit {
 
   public users;
   // tslint:disable-next-line:ban-types
-  public data: Object = {};
+  public data: User = new User();
   public addFlag = true;
   constructor(public userService: UserService) {
     this.userService.getAllUsers().subscribe(data => this.users = data);
    }
    formSubmit() {
-    this.userService.addUser(this.data).subscribe (
+    /*this.userService.addUser(this.data).subscribe (
         (newUser) => {
           this.users = this.users.concat(newUser);
           console.log(this.users);
-          this.data = {};
+          this.data = new User();
         }
-      )
+      )*/
   }
   ngOnInit() {
   }
@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit {
         console.log('new list loaded');
       });
   }
-  loadForUpdate(id: string, uName: string, password: string, token: number) {
+  loadForUpdate(id: number, uName: string, password: string, token: string) {
     this.data = new User();
     this.data.id = id;
     this.data.uName = uName;
@@ -48,7 +48,7 @@ export class UserListComponent implements OnInit {
   }
   cancelUpdate() {
     this.addFlag = true;
-    this.data = {};
+    this.data = new User();
   }
 
 }
